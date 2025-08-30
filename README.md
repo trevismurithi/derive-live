@@ -18,16 +18,37 @@ A Node.js trading bot that connects to Deriv API and executes trades based on ma
 
 ### Installation
 ```bash
+# Run the setup script
+./setup.sh
+
+# Or manually:
 npm install
+```
+
+### Environment Configuration
+1. **Edit `config.env`** with your API credentials:
+```bash
+# Deriv API Configuration
+DERIV_API_TOKEN=your_deriv_api_token_here
+DERIV_APP_ID=your_deriv_app_id_here
+
+# Server Configuration
+PORT=8084
+WEBSOCKET_PORT=8084
+NODE_ENV=development
+
+# Trading Configuration
+TRADING_AMOUNT=20
+SYMBOL=1HZ10V
 ```
 
 ### Running Locally
 ```bash
-# Start both processes with PM2
-npm run dev
+# Start with environment variables (recommended)
+npm run dev:env
 
-# Or start with PM2 directly
-pm2 start ecosystem.config.js
+# Start without environment variables
+npm run dev
 
 # View logs
 npm run logs

@@ -29,7 +29,7 @@ let timerInterval = null;
 let timer = 0;
 let wbsocket = null;
 let currentTickLoss = null
-const apiUrlWb = "ws://localhost:8084";
+const apiUrlWb = `ws://localhost:${process.env.WEBSOCKET_PORT || 8084}`;
 
 // Time validation functions
 function isWithinTradingHours() {

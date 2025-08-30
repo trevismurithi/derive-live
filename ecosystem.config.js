@@ -1,3 +1,5 @@
+require('dotenv').config({ path: './config.env' });
+
 module.exports = {
   apps: [
     {
@@ -29,13 +31,13 @@ module.exports = {
       max_memory_restart: '1G',
       env: {
         NODE_ENV: 'production',
-        PORT: process.env.PORT || 8084,
+        WEBSOCKET_PORT: 8084,
         DERIV_API_TOKEN: process.env.DERIV_API_TOKEN,
         DERIV_APP_ID: process.env.DERIV_APP_ID
       },
       env_production: {
         NODE_ENV: 'production',
-        PORT: process.env.PORT || 8084,
+        WEBSOCKET_PORT: 8084,
         DERIV_API_TOKEN: process.env.DERIV_API_TOKEN,
         DERIV_APP_ID: process.env.DERIV_APP_ID
       }
