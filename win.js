@@ -1,4 +1,5 @@
 const WebSocket = require("ws");
+const http = require("http");
 require("colors");
 const fs = require("fs");
 const { CronJob } = require("cron");
@@ -108,11 +109,31 @@ function connect() {
 }
 
 function MotherServer() {
-  forwardSocket = new WebSocket.Server({
-    port: 8084,
-  }); // Create a new WebSocket connection using the app_id
+  const port = process.env.PORT || 8084;
+  
+  // Create HTTP server for Heroku
+  const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ 
+      status: 'Trading Bot Running',
+      timestamp: new Date().toISOString(),
+      port: port,
+      clients: clients.length
+    }));
+  });
 
-  console.log("Forward Server started on port 8084");
+  // Create WebSocket server
+  forwardSocket = new WebSocket.Server({ 
+    server: server 
+  });
+
+  // Start the server
+  server.listen(port, () => {
+    console.log(`🚀 Trading Bot Server started on port ${port}`);
+    console.log(`📊 HTTP endpoint: http://localhost:${port}`);
+    console.log(`🔌 WebSocket endpoint: ws://localhost:${port}`);
+  });
+
   forwardSocket.on("connection", function connection(ws) {
     console.log("Client connected");
 
