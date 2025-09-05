@@ -18,7 +18,7 @@ const myProposal = {
   contract_type: "ACCU",
   currency: "USD",
   growth_rate: 0.05,
-  symbol: "1HZ100V",
+  symbol: "1HZ10V",
   limit_order: { take_profit: 1 },
 };
 
